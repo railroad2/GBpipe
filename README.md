@@ -1,1 +1,1 @@
-# GBpipe
+# GB pipeline 

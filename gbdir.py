@@ -1,4 +1,4 @@
-# 
+#
 # This file is part of GBpipe.
 #
 # GBpipe is a package for GroundBIRD data processing.
@@ -55,7 +55,7 @@ def GBrotmat(EL=GBangles.zen_EL, AZ=0, LAT=GBangles.lat, LST=0, coord='C'): # an
 
     Parameters
     ----------
-    EL
+    EL : 
 
     Returns
     -------
@@ -68,12 +68,21 @@ def GBrotmat(EL=GBangles.zen_EL, AZ=0, LAT=GBangles.lat, LST=0, coord='C'): # an
         r3 = hp.Rotator( coord=['C', 'G'] ) # equatorial to galactic coordinate. 
         res = np.matmul(r3.mat, res)
 
+    #print(r2(r1([0,0,1])))
+
     return res
 
 
 #modules for tests
 def test_GBrotmat():
-    print(GBrotmat())
+    v_arr=[]
+
+    for i in range(100000):
+        rmat = GBrotmat(i)
+        v_arr.append(np.array(np.random.random(3)))
+    v_arr = np.array(v_arr)
+    print(np.dot(rmat, v_arr.T).T)
 
 if __name__=='__main__':
     test_GBrotmat()
+
